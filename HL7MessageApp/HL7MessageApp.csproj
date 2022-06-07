@@ -79,5 +79,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HL7MessageUtility\HL7MessageUtility.csproj">
+      <Project>{6604453D-2BB5-45F4-A733-B06A60F99D07}</Project>
+      <Name>HL7MessageUtility</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
