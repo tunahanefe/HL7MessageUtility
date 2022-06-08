@@ -29,9 +29,18 @@ namespace HL7MessageUtility
             foreach (var itemSeg in Segments)
             {
                 sonuc += itemSeg.SegmentName;
-                foreach (KeyValuePair<int, string> itemElement in itemSeg.Elements)
+                //foreach (KeyValuePair<int, string> itemElement in itemSeg.Elements)
+                //{
+                //    sonuc += "|" + itemElement.Value;
+                //}
+                for (int i = 1; i < (itemSeg.Elements.Count+1); i++)
                 {
-                    sonuc += "|" + itemElement.Value;
+                    if (itemSeg.SegmentName == "MSH" && i <= 1)
+                    {
+                        // MSH segmentinin özel bir durumu var MSH|^~\& -> ifadesindeki | File speratör karakteri 1. element sayılıyor
+                        continue;
+                    }
+                    sonuc += "|" + itemSeg.Elements[i];
                 }
                 sonuc += Convert.ToChar(13);
             }

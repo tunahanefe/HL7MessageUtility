@@ -30,7 +30,7 @@ namespace HL7MessageUtility
         public HL7SegmentModel(string[] elementVals)
         {
             this.SegmentName = elementVals[0];
-            Bind(elementVals);
+            Bind(elementVals, this.SegmentName);
         }
 
         /// <summary>
@@ -50,12 +50,28 @@ namespace HL7MessageUtility
         /// Hazır HL7 mesajını modellemek için kullanılır.
         /// </summary>
         /// <param name="elementVals">Element değerleri.</param>
-        private void Bind(string[] elementVals)
+        private void Bind(string[] elementVals, string _segmentName)
         {
+            // MSH segmentinin özel bir durumu var MSH|^~\& -> ifadesindeki | File speratör karakteri 1. element sayılıyor
+            // gönderilen segment MSH ise 2. indisten itibaren ekle, diğerlerinde 1. indisten itibaren ekle.
             this.Elements = new Dictionary<int, string>();
-            for (int i = 1; i < elementVals.Length; i++)
+            for (int i = 1; i <= elementVals.Length; i++)
             {
-                Elements.Add(i, elementVals[i]);
+                if (_segmentName == "MSH" && i <= 1)
+                {
+                    Elements.Add(i, "|");
+                }
+                else if (_segmentName == "MSH" && i > 1)
+                {
+                    Elements.Add(i, elementVals[i - 1]);
+                }
+                else
+                {
+                    if (i < elementVals.Count())
+                    {
+                        Elements.Add(i, elementVals[i]);
+                    }
+                }
             }
         }
     }

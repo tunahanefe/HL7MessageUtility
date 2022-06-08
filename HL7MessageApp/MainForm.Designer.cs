@@ -73,6 +73,7 @@
             this.btnAdt.TabIndex = 0;
             this.btnAdt.Text = "Örnek: ADT To Mesaj";
             this.btnAdt.UseVisualStyleBackColor = true;
+            this.btnAdt.Click += new System.EventHandler(this.btnAdt_Click);
             // 
             // btnAdtToText
             // 
@@ -82,6 +83,7 @@
             this.btnAdtToText.TabIndex = 1;
             this.btnAdtToText.Text = "Mesaj To Model";
             this.btnAdtToText.UseVisualStyleBackColor = true;
+            this.btnAdtToText.Click += new System.EventHandler(this.btnAdtToText_Click);
             // 
             // tbHL7
             // 
@@ -179,6 +181,7 @@
             this.btnGonder.TabIndex = 3;
             this.btnGonder.Text = "Gönder";
             this.btnGonder.UseVisualStyleBackColor = true;
+            this.btnGonder.Click += new System.EventHandler(this.btnGonder_Click);
             // 
             // label2
             // 
@@ -206,6 +209,7 @@
             this.btnHL7.TabIndex = 2;
             this.btnHL7.Text = "HL7";
             this.btnHL7.UseVisualStyleBackColor = true;
+            this.btnHL7.Click += new System.EventHandler(this.btnHL7_Click);
             // 
             // treeView1
             // 
