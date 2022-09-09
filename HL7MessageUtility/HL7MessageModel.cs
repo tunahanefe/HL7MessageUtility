@@ -13,11 +13,27 @@ namespace HL7MessageUtility
 
     public class HL7MessageModel
     {
-        public HL7SegmentModel[] Segments { get; set; }
+        public List<HL7SegmentModel> Segments { get; set; }
 
         public HL7MessageModel(params HL7SegmentModel[] hL7SegmentModels)
         {
-            this.Segments = hL7SegmentModels;
+            this.Segments = hL7SegmentModels.ToList();
+            // segmentin çoğatma parametresi var ise burada ataması yapılabilir
+
+            //hL7SegmentModels.ToList().ForEach(x =>
+            //{
+            //    x.
+            //}
+            //);
+
+            foreach (var itemSegment in hL7SegmentModels.ToList())
+            {
+                for (int i = 1; i < itemSegment.SegmentCount; i++)
+                {
+                    itemSegment.Elements[1] = i.ToString();
+                    this.Segments.Add(itemSegment);
+                }
+            }
         }
 
         public string ModelToMesaj()

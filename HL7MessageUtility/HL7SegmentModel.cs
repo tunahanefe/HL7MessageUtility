@@ -6,19 +6,22 @@ using System.Threading.Tasks;
 
 namespace HL7MessageUtility
 {
+    //TODO: HL7SegmentModel constructuruna bir segmentin kaç kere ekleneceği parametresi alsın. sayaç numarasını ilk elementine eklesin
     public class HL7SegmentModel
     {
         public string SegmentName { get; set; }
         public Dictionary<Int32, string> Elements { get; set; }
+        public Int16 SegmentCount { get; set; }
 
         /// <summary>
         /// Standart bir HL7 Mesaj oluşturmak için.
         /// </summary>
         /// <param name="segmentName">Segment ismi. Örn: MSH, PID, PV1.</param>
         /// <param name="elementCount">Segmentin içindeki element sayısı.</param>
-        public HL7SegmentModel(string segmentName, Int32 elementCount)
+        public HL7SegmentModel(string segmentName, Int32 elementCount, Int16 segmentCount = 1)
         {
             this.SegmentName = segmentName;
+            this.SegmentCount = segmentCount;
             Bind(elementCount);
         }
 
@@ -42,7 +45,14 @@ namespace HL7MessageUtility
             Elements = new Dictionary<int, string>();
             for (int i = 1; i < elementCount; i++)
             {
-                Elements.Add(i, "");
+                if (i == 1)
+                {
+                    Elements.Add(i, ""); // Değer olarak dışardan gelen parametrik indis numarasını eklesin.
+                }
+                else
+                {
+                    Elements.Add(i, "");
+                }
             }
         }
 

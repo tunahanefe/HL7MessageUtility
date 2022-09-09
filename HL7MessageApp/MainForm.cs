@@ -22,6 +22,7 @@ namespace HL7MessageApp
         private void btnAdt_Click(object sender, EventArgs e)
         {
             var ADT = new HL7MessageModel(new HL7SegmentModel("MSH", 15), new HL7SegmentModel("EVN", 2), new HL7SegmentModel("PID", 13), new HL7SegmentModel("PV1", 3));
+            
             var index = -1;
             index = ADT.Segments.ToList().FindIndex(x => x.SegmentName == "MSH");
             if (index > -1)
